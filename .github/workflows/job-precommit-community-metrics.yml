@@ -1,0 +1,27 @@
+name: Community_Metrics
+
+on:
+  push:
+    branches: ['master', 'release-*']
+    tags: 'v*'
+  pull_request:
+    branches: ['master', 'release-*']
+    tags: 'v*'
+    paths: ['test-infra/metrics/**']
+
+jobs:
+  community-metrics:
+    name: Run Community Metrics
+    runs-on: self-hosted
+    timeout-minutes: 60
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credential: false
+          submodules: recursive
+      - name: Run :communityMetricsPreCommit
+        uses: ./github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :communityMetricsPreCommit
+
