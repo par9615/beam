@@ -2,7 +2,7 @@ name: Community_Metrics
 
 on:
   push:
-    branches: ['master', 'release-*']
+    branches: ['master', 'release-*', 'community-metrics-precommit-migration']
     tags: 'v*'
   pull_request:
     branches: ['master', 'release-*']
@@ -21,7 +21,6 @@ jobs:
           persist-credential: false
           submodules: recursive
       - name: Run :communityMetricsPreCommit
-        uses: ./github/actions/gradle-command-self-hosted-action
+        uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: :communityMetricsPreCommit
-
