@@ -1,4 +1,4 @@
-name: Community_Metrics
+name: Python_Docker
 
 on:
   push:
@@ -7,20 +7,23 @@ on:
   pull_request:
     branches: ['master', 'release-*']
     tags: 'v*'
-    paths: ['test-infra/metrics/**']
+    paths:
+      - 'model/**'
+      - 'sdks/python/**'
+      - 'release/**'
 
 jobs:
-  community-metrics:
-    name: Run Community Metrics
+  name: Run Python Docker
     runs-on: self-hosted
-    timeout-minutes: 60
+    timeout-minutes: 30
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           persist-credential: false
           submodules: recursive
-      - name: Run :communityMetricsPreCommit
+      - name: Run :pythonDockerBuildPreCommit
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: :communityMetricsPreCommit
+          gradle-command: :pythonDockerBuildPreCommit
+          gradle-switches: "--info"
