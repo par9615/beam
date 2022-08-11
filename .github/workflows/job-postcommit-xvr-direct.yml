@@ -1,0 +1,34 @@
+name: PostCommit_XVR_Direct
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  push:
+    branches: ['master', 'release-*', 'postcommit-xvr-migration']
+    tags: 'v*'
+  pull_request:
+    branches: ['master', 'release-*']
+    tags: 'v*'
+
+jobs:
+  xvr-direct:
+    name: Run PostCommit XVR Direct
+    runs-on: self-hosted
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        version: ['3.7', '3.8', '3.9']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - name: Run :runners:flink:1.13:job-server:validatesCrossLanguageRunner
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :runners:flink:1.13:job-server:validatesCrossLanguageRunner
+          gradle-switches: "-PpythonVersion=${{ matrix.version }})"
+
+
+
