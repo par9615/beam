@@ -1,0 +1,26 @@
+name: Go Samza ValidatesRunner Tests
+on:
+  #  schedule:
+  #    - cron: '0 */6 * * *'
+  push:
+    branches: ['master', 'release-*', 'postcommit-vr-migration']
+    tags: 'v*'
+  pull_request:
+    branches: ['master', 'release-*']
+    tags: 'v*'
+
+jobs:
+  postcommit-go-vr-samza:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credential: false
+          submodules: recursive
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action
+      - name: Run :sdks:go:test:samzaValidatesRunner
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :sdks:go:test:samzaValidatesRunner
