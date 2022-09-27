@@ -18,10 +18,11 @@
 name: PreCommit Python Docker
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 */6 * * *'
   push:
-    branches: ['master', 'release-*']
+    branches: ['master', 'release-*', 'precommit-community-metrics-migration']
     tags: 'v*'
   pull_request_target:
     branches: ['master', 'release-*']
@@ -35,7 +36,7 @@ permissions: read-all
 jobs:
   python-docker:
     name: Python Docker
-    runs-on: self-hosted
+    runs-on: [self-hosted, ubuntu-20.04]
     timeout-minutes: 30
     steps:
       - name: Checkout code

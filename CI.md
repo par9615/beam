@@ -125,17 +125,23 @@ Service Account shall have following permissions ([IAM roles](https://cloud.goog
 | Java Wordcount Direct Runner | Runs Java WordCount example with Direct Runner.                                               | Yes              | Yes                   | Yes           | -                        |
 | Java Wordcount Dataflow      | Runs Java WordCount example with DataFlow Runner.                                             | -                | Yes                   | Yes           | Yes                      |
 
+### All migrated workflows run based on the following triggers
+
+| Description | Pull Request Run | Direct Push/Merge Run | Scheduled Run | Workflow Dispatch |
+|-------------|------------------|-----------------------|---------------|-------------------|
+| PostCommit  | No               | Yes                   | Yes           | Yes               |
+| PreCommit   | Yes              | Yes                   | Yes           | Yes               |
+
 ### PreCommit Workflows
-
-#### Python Community Metrics - [job-precommit-python-community-metrics.yml](.github/workflows/job-precommit-community-metrics.yml)
-| Job                         | Description                   | Pull Request Run | Direct Push/Merge Run | Scheduled Run | Requires GCP Credentials |
-|-----------------------------|-------------------------------|------------------|-----------------------|---------------|--------------------------|
-| PreCommit Community Metrics | Runs Python Community Metrics | Yes              | Yes                   | Yes           | -                        |
-
-#### Python Docker - [job-precommit-python-docker.yml](.github/workflows/job-precommit-python-docker.yml)
-| Job                     | Description              | Pull Request Run | Direct Push/Merge Run | Scheduled Run | Requires GCP Credentials |
-|-------------------------|--------------------------|------------------|-----------------------|---------------|--------------------------|
-| PreCommit Python Docker | Runs Python Docker Tests | Yes              | Yes                   | Yes           | -                        |
+| Workflow                                                                                             | Description                  | Requires GCP Credentials |
+|------------------------------------------------------------------------------------------------------|------------------------------|--------------------------|
+| [job-precommit-python-community-metrics.yml](.github/workflows/job-precommit-community-metrics.yml)) | Runs Python Community Metric | No                       |
+| [job-precommit-python-docker.yml](.github/workflows/job-precommit-python-docker.yml)                 | Runs Python Docker Tests     | No                       |
+  
+### PostCommit Workflows
+| Workflow                                                                           | Description             | Requires GCP Credentials |
+|------------------------------------------------------------------------------------|-------------------------|--------------------------|
+| [job-postcommit-placeholder.yml](.github/workflows/job-postcommit-placeholder.yml) | Description placeholder | Yes/No                   |
 
 ### GitHub Action Tips
 
