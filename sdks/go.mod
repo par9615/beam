@@ -36,7 +36,7 @@ require (
 	github.com/lib/pq v1.10.7
 	github.com/linkedin/goavro v2.1.0+incompatible
 	github.com/nightlyone/lockfile v1.0.0
-	github.com/proullon/ramsql v0.0.0-20211120092837-c8d0a408b939
+	github.com/proullon/ramsql v0.0.1
 	github.com/spf13/cobra v1.6.1
 	github.com/testcontainers/testcontainers-go v0.14.0
 	github.com/xitongsys/parquet-go v1.6.2
